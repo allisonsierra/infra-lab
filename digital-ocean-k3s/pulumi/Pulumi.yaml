@@ -1,0 +1,7 @@
+name: digital-ocean-k3s
+runtime: go
+description: A minimal DigitalOcean Go Pulumi program
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: digitalocean-go
