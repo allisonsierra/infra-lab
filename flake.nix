@@ -6,13 +6,18 @@
     naersk.url = "github:nmattia/naersk";
   };
 
+
+
   outputs = { self, nixpkgs, utils, naersk }:
     utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages."${system}";
+        # Hashicorp uses a BSL licenses so we need config.allowUnfree = true
+        pkgs = import nixpkgs { system = "${system}"; config.allowUnfree = true; };
         naersk-lib = naersk.lib."${system}";
-      in
 
+
+      in
+      rec {
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             # General
@@ -21,11 +26,13 @@
             # Infrastructure
             tfswitch
             packer
+            pulumi-bin
 
             # Nix
             nixpkgs-fmt
           ];
 
         };
+      });
       
 }
