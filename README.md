@@ -1,2 +1,3 @@
 # infra-lab
-Infrastructure lab to demo IaC
+
+This monorepo is used to demonstrate using various IaC tools to deploy infrastructure to cloud providers.
